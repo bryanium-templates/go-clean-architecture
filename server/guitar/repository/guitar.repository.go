@@ -15,3 +15,19 @@ func (r *guitarRepository) AddGuitar(guitar guitar_core.Guitar) error {
 	result := database.DB.Create(&guitar)
 	return result.Error
 }
+
+func (r *guitarRepository) FindAllGuitars() ([]guitar_core.Guitar, error) {
+	var guitars []guitar_core.Guitar
+	err := database.DB.Find(&guitars).Error
+	return guitars, err
+}
+
+func (r *guitarRepository) FindGuitarById(id uint) (*guitar_core.Guitar, error) {
+	var guitar guitar_core.Guitar
+	err := database.DB.First(&guitar, id).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return &guitar, nil
+}

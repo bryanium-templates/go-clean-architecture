@@ -12,6 +12,8 @@ type Guitar struct {
 
 type GuitarRepository interface {
 	AddGuitar(guitar Guitar) error
+	FindAllGuitars() ([]Guitar, error)
+	FindGuitarById(id uint) (*Guitar, error)
 }
 
 

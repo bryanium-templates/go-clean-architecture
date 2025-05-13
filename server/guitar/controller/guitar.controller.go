@@ -3,6 +3,7 @@ package controller
 import (
 	"net/http"
 	guitar_core "server/guitar/core"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,4 +29,32 @@ func (c *GuitarController) AddGuitar(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusCreated, gin.H{"message":"A guitar has been added successfully", "data": guitarData})
+}
+
+func (c *GuitarController) FindAllGuitars(ctx *gin.Context) {
+	guitars, err := c.service.FindAllGuitars()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error":"Failed to retrieve guitars"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, guitars)
+}
+
+func (c *GuitarController) FindGuitarById(ctx *gin.Context) {
+	strId := ctx.Param("id")
+	id, err := strconv.Atoi(strId)
+
+	if err != nil || id < 1 {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Guitar ID"})
+		return
+	}
+
+	guitar, err := c.service.FindGuitarById(uint(id))
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error":"Guitar ID not found"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, guitar)
 }

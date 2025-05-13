@@ -32,3 +32,15 @@ func (s *GuitarService) CreateGuitar(dto MutateGuitarDTO) error {
 
 	return s.repository.AddGuitar(guitar)
 }
+
+func (s *GuitarService) FindAllGuitars() ([]Guitar, error) {
+	return s.repository.FindAllGuitars()
+}
+
+func (s *GuitarService) FindGuitarById(id uint) (*Guitar, error) {
+	if id == 0 {
+		return nil, errors.New("guitar id not found, please provide one")
+	}
+
+	return s.repository.FindGuitarById(id)
+}
