@@ -1,9 +1,13 @@
 package guitar_core
 
-import "gorm.io/gorm"
+import (
+	"github.com/google/uuid"
+	"gorm.io/gorm"
+)
 
 type Guitar struct {
 	gorm.Model
+	ID uuid.UUID 
 	Name string
 	Brand string
 	Price float64
