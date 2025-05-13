@@ -3,6 +3,8 @@ package repository
 import (
 	guitar_core "server/guitar/core"
 	"server/infrastructure/database"
+
+	"github.com/google/uuid"
 )
 
 type guitarRepository struct{}
@@ -12,6 +14,7 @@ func NewGuitarRepository() guitar_core.GuitarRepository {
 }
 
 func (r *guitarRepository) AddGuitar(guitar guitar_core.Guitar) error {
+	guitar.ID = uuid.New()
 	result := database.DB.Create(&guitar)
 	return result.Error
 }
