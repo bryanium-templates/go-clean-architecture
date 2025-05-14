@@ -8,8 +8,9 @@ import (
 type Guitar struct {
 	gorm.Model
 	ID uuid.UUID 
-	Name string
+	Name string `gorm:"unique; not null"`
 	Brand string
+	Description string
 	Price float64
 	Category GuitarCategory
 }

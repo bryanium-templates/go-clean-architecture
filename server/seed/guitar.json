@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Stratocaster",
+    "brand": "Fender",
+    "description": "A classic single-coil electric guitar.",
+    "price": 1200.00,
+    "category": "electric"
+  },
+  {
+    "name": "Les Paul Standard",
+    "brand": "Gibson",
+    "description": "A premium humbucker electric guitar.",
+    "price": 2500.00,
+    "category": "electric"
+  },
+  {
+    "name": "D-28",
+    "brand": "Martin",
+    "description": "A high-end dreadnought acoustic guitar.",
+    "price": 3000.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "SG Standard",
+    "brand": "Gibson",
+    "description": "A lighter double-cutaway electric guitar.",
+    "price": 1800.00,
+    "category": "electric"
+  },
+  {
+    "name": "Telecaster",
+    "brand": "Fender",
+    "description": "Bright and twangy tones, ideal for country and rock.",
+    "price": 1100.00,
+    "category": "electric"
+  },
+  {
+    "name": "FG800",
+    "brand": "Yamaha",
+    "description": "Affordable and durable acoustic for beginners.",
+    "price": 220.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "CE44",
+    "brand": "Ovation",
+    "description": "Roundback acoustic-electric with unique tone.",
+    "price": 700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "814ce",
+    "brand": "Taylor",
+    "description": "Premium acoustic-electric with versatile tones.",
+    "price": 3500.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "RG550",
+    "brand": "Ibanez",
+    "description": "High-performance guitar for shredders.",
+    "price": 1300.00,
+    "category": "electric"
+  },
+  {
+    "name": "SE Custom 24",
+    "brand": "PRS",
+    "description": "Affordable version of their flagship guitar.",
+    "price": 850.00,
+    "category": "electric"
+  },
+  {
+    "name": "J-45",
+    "brand": "Gibson",
+    "description": "Warm and full-sounding acoustic guitar.",
+    "price": 2700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Academy 12",
+    "brand": "Taylor",
+    "description": "Comfortable and great-sounding entry acoustic.",
+    "price": 700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Rogue Starter",
+    "brand": "Rogue",
+    "description": "Budget-friendly beginner's acoustic guitar.",
+    "price": 100.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Explorer",
+    "brand": "Gibson",
+    "description": "Aggressive styling with powerful tone.",
+    "price": 1900.00,
+    "category": "electric"
+  },
+  {
+    "name": "G2655 Streamliner",
+    "brand": "Gretsch",
+    "description": "Semi-hollow body electric with vintage charm.",
+    "price": 550.00,
+    "category": "electric"
+  }
+]
