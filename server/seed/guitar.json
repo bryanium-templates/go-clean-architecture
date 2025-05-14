@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Stratocaster",
+    "brand": "Fender",
+    "description": "The Fender Stratocaster is a legendary single-coil electric guitar known for its iconic tone and sleek design. With its contoured body, bright, articulate sound, and unmatched playability, it's the go-to choice for countless rock, blues, and pop legends.",
+    "price": 1200.00,
+    "category": "electric"
+  },
+  {
+    "name": "Les Paul Standard",
+    "brand": "Gibson",
+    "description": "Crafted for serious tone and timeless style, the Gibson Les Paul Standard delivers rich, warm humbucker power with luxurious sustain. Its carved maple top, solid mahogany body, and classic feel make it a staple of rock and blues history.",
+    "price": 2500.00,
+    "category": "electric"
+  },
+  {
+    "name": "D-28",
+    "brand": "Martin",
+    "description": "A revered acoustic model, the Martin D-28 features a bold, resonant dreadnought sound that has shaped music for generations. Its rosewood back and sides, coupled with a spruce top, offer deep lows, crisp highs, and powerful projection.",
+    "price": 3000.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "SG Standard",
+    "brand": "Gibson",
+    "description": "The Gibson SG Standard is a lighter, double-cutaway electric guitar with fiery tone and easy upper fret access. A favorite among hard rockers and metalheads, it boasts aggressive mids and fast-playing neck comfort.",
+    "price": 1800.00,
+    "category": "electric"
+  },
+  {
+    "name": "Telecaster",
+    "brand": "Fender",
+    "description": "The Fender Telecaster is the definition of twang and clarity, delivering bright tones perfect for country, indie, and classic rock. Its simple yet effective design and crystal-clear pickups make it an enduring favorite.",
+    "price": 1100.00,
+    "category": "electric"
+  },
+  {
+    "name": "FG800",
+    "brand": "Yamaha",
+    "description": "The Yamaha FG800 is a beginner-friendly acoustic guitar that doesn't compromise on quality. With a solid spruce top and durable construction, it offers surprisingly rich tone and reliable playability at a budget price.",
+    "price": 220.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "CE44",
+    "brand": "Ovation",
+    "description": "The Ovation CE44 is a distinctive roundback acoustic-electric guitar with a cutting-edge design. Its Lyrachord body and multi-soundhole top produce a unique, focused tone that shines both on stage and in the studio.",
+    "price": 700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "814ce",
+    "brand": "Taylor",
+    "description": "The Taylor 814ce is a flagship acoustic-electric that blends elegance and sonic versatility. Its Grand Auditorium shape, solid tonewoods, and Expression System electronics deliver lush, expressive sound for any genre.",
+    "price": 3500.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "RG550",
+    "brand": "Ibanez",
+    "description": "Designed for speed and precision, the Ibanez RG550 is a shredder’s dream. With a slim Super Wizard neck, aggressive pickups, and a double-locking tremolo system, it’s built for high-octane solos and blazing riffs.",
+    "price": 1300.00,
+    "category": "electric"
+  },
+  {
+    "name": "SE Custom 24",
+    "brand": "PRS",
+    "description": "The PRS SE Custom 24 brings the essence of the brand’s high-end models to an accessible level. Featuring a versatile sound palette, beautiful finish, and smooth playability, it's perfect for stage, studio, or practice.",
+    "price": 850.00,
+    "category": "electric"
+  },
+  {
+    "name": "J-45",
+    "brand": "Gibson",
+    "description": "Known as 'The Workhorse,' the Gibson J-45 is a warm and powerful dreadnought acoustic with exceptional projection. Its balanced tone and iconic slope-shoulder design make it beloved by singer-songwriters worldwide.",
+    "price": 2700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Academy 12",
+    "brand": "Taylor",
+    "description": "Comfort and tone meet in the Taylor Academy 12, a thoughtfully designed entry-level acoustic guitar. Its ergonomic armrest, lightweight body, and crisp tone make it ideal for new players and casual performers alike.",
+    "price": 700.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Rogue Starter",
+    "brand": "Rogue",
+    "description": "Perfect for absolute beginners, the Rogue Starter acoustic guitar offers simplicity and affordability in one neat package. It’s compact, easy to handle, and a great way to learn the basics without breaking the bank.",
+    "price": 100.00,
+    "category": "acoustic"
+  },
+  {
+    "name": "Explorer",
+    "brand": "Gibson",
+    "description": "Bold and futuristic, the Gibson Explorer features a radical body shape and a powerful, cutting tone. A favorite of metal and hard rock players, it commands attention both visually and sonically on any stage.",
+    "price": 1900.00,
+    "category": "electric"
+  },
+  {
+    "name": "G2655 Streamliner",
+    "brand": "Gretsch",
+    "description": "The Gretsch G2655 Streamliner is a semi-hollow electric guitar with vintage soul. With its punchy Broad’Tron pickups and elegant curves, it delivers smooth jazz, gritty blues, and old-school rock tones with style.",
+    "price": 550.00,
+    "category": "electric"
+  }
+]
