@@ -26,6 +26,7 @@ func (s *GuitarService) CreateGuitar(dto MutateGuitarDTO) error {
 	guitar := Guitar{
 		Name:     dto.Name,
 		Brand:    dto.Brand,
+		Description: dto.Description,
 		Price:    dto.Price,
 		Category: dto.Category,
 	}
@@ -43,4 +44,33 @@ func (s *GuitarService) FindGuitarById(id uint) (*Guitar, error) {
 	}
 
 	return s.repository.FindGuitarById(id)
+}
+
+func (s *GuitarService) UpdateGuitar(id uint, dto MutateGuitarDTO) error {
+	if id == 0 {
+		return errors.New("guitar id not found, please provide one")
+	}
+
+	if dto.Category != Acoustic && dto.Category != Electric {
+		return errors.New("category must be either 'acoustic' or 'electric'")
+	}
+
+	if dto.Price <= 0 {
+		return errors.New("price must be greater than zero")
+	}
+
+	updatedGuitar := Guitar{
+		Name:        dto.Name,
+		Brand:       dto.Brand,
+		Description: dto.Description,
+		Price:       dto.Price,
+		Category:    dto.Category,
+	}
+
+	return s.repository.UpdateGuitar(id, updatedGuitar)
+}
+
+
+func (s *GuitarService) DeleteGuitar(id uint) error {
+	return s.repository.DeleteGuitar(id)
 }

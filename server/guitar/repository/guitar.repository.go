@@ -34,3 +34,25 @@ func (r *guitarRepository) FindGuitarById(id uint) (*guitar_core.Guitar, error) 
 
 	return &guitar, nil
 }
+
+func (r *guitarRepository) UpdateGuitar(id uint, guitar guitar_core.Guitar) error {
+	var existing guitar_core.Guitar
+
+	if err := database.DB.First(&existing, id).Error; err != nil {
+		return err
+	}
+
+	if err := database.DB.Model(&existing).Updates(guitar).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+
+func (r *guitarRepository) DeleteGuitar(id uint) error {
+	if err := database.DB.Delete(&guitar_core.Guitar{}, id).Error; err != nil {
+		return err
+	}
+	return nil
+}

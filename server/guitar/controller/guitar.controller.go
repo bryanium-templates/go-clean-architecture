@@ -58,3 +58,44 @@ func (c *GuitarController) FindGuitarById(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, guitar)
 }
+
+func (c *GuitarController) UpdateGuitar(ctx *gin.Context) {
+	strId := ctx.Param("id")
+	id, err := strconv.Atoi(strId)
+
+	if err != nil || id < 1 {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Guitar ID"})
+		return
+	}
+
+	var dto guitar_core.MutateGuitarDTO
+	if err := ctx.ShouldBindJSON(&dto); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+
+	if err := c.service.UpdateGuitar(uint(id), dto); err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Guitar updated successfully"})
+}
+
+
+func (c*GuitarController) DeleteGuitar(ctx *gin.Context) {
+	strId := ctx.Param("id")
+	id, err := strconv.Atoi(strId)
+
+	if err != nil || id < 1 {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Guitar ID"})
+		return
+	}
+
+	if err := c.service.DeleteGuitar(uint(id)); err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Guitar successfully deleted"})
+}

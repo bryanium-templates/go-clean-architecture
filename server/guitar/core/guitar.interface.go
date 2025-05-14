@@ -19,6 +19,8 @@ type GuitarRepository interface {
 	AddGuitar(guitar Guitar) error
 	FindAllGuitars() ([]Guitar, error)
 	FindGuitarById(id uint) (*Guitar, error)
+	UpdateGuitar(id uint, guitar Guitar) error
+	DeleteGuitar(id uint) error
 }
 
 
