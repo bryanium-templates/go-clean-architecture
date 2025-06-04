@@ -8,7 +8,7 @@ import (
 type GuitarCategory string
 
 type Guitar struct {
-	ID uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
+	ID uuid.UUID `gorm:"primaryKey;type:uuid"`
 
 	Name string `gorm:"type:varchar(100);not null"`
 	Brand string `gorm:"type:varchar(100);not null"`
