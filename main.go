@@ -7,6 +7,7 @@ import (
 func init() {
 	infrastructure.LoadEnvVariables()
 	infrastructure.ConnectDb()
+	infrastructure.SyncDatabase()
 }
 
 
