@@ -4,20 +4,33 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-func AddGuitar (c *gin.Context) {
+// Handler Layer Initializer
+type Handler struct {
+	service *Service
+}
+
+func NewHandler(db *gorm.DB) *Handler {
+	repo := NewRepository(db)
+	service := NewService(repo)
+	return &Handler{ service: service}
+}
+
+// Handler Layer Methods
+func (h *Handler) AddGuitar (c *gin.Context) {
 	log.Println("AddGuitar Endpoint")
 }
 
-func GetAllGuitars (c *gin.Context) {
-	log.Println("GettAllGuitars Endpoint")
+func (h *Handler) GetAllGuitars (c *gin.Context) {
+	log.Println("GetAllGuitars Endpoint")
 }
 
-func UpdateGuitar (c *gin.Context) {
+func (h *Handler) UpdateGuitar (c *gin.Context) {
 	log.Println("UpdateGuitar Endpoint")
 }
 
-func DeleteGuitar (c *gin.Context) {
+func (h *Handler) DeleteGuitar (c *gin.Context) {
 	log.Println("DeleteGuitar Endpoint")
 }
