@@ -5,12 +5,14 @@ import (
 
 	"github.com/bryanium-templates/go-clean-architecture/internal/auth"
 	"github.com/bryanium-templates/go-clean-architecture/internal/guitar"
+	"github.com/bryanium-templates/go-clean-architecture/internal/passwordreset"
 	"github.com/bryanium-templates/go-clean-architecture/internal/user"
 )
 
 func RegisterRoutes(r *gin.Engine) {
 	authHandler := auth.NewHandler(DB)
 	userHandler := user.NewHandler(DB)
+	passwordResetHandler := passwordreset.NewHandler(DB)
 	guitarHandler := guitar.NewHandler(DB)
 
 	authGroup := r.Group("/auth") 
@@ -26,6 +28,13 @@ func RegisterRoutes(r *gin.Engine) {
 		userGroup.PUT("/update/profile-picture", userHandler.UpdateProfilePicture)
 		userGroup.DELETE("/delete/:id", userHandler.DeleteUser)
 		userGroup.GET("/", userHandler.GetAllUsers)
+	}
+
+	passwordResetGroup := r.Group("/password-reset")
+	{
+		passwordResetGroup.POST("/request", passwordResetHandler.RequestPasswordReset)
+		passwordResetGroup.POST("/verify", passwordResetHandler.VerifyCode)
+		passwordResetGroup.PUT("/update", passwordResetHandler.UpdatePassword)
 	}
 
 	guitarGroup := r.Group("/guitar")
