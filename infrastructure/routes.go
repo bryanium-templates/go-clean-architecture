@@ -5,10 +5,12 @@ import (
 
 	"github.com/bryanium-templates/go-clean-architecture/internal/auth"
 	"github.com/bryanium-templates/go-clean-architecture/internal/guitar"
+	"github.com/bryanium-templates/go-clean-architecture/internal/user"
 )
 
 func RegisterRoutes(r *gin.Engine) {
 	authHandler := auth.NewHandler(DB)
+	userHandler := user.NewHandler(DB)
 	guitarHandler := guitar.NewHandler(DB)
 
 	authGroup := r.Group("/auth") 
@@ -16,6 +18,14 @@ func RegisterRoutes(r *gin.Engine) {
 		authGroup.POST("/signup", authHandler.SignUp)
 		authGroup.POST("/signin", authHandler.SignIn)
 		authGroup.POST("/signout", authHandler.SignOut)
+	}
+
+	userGroup := r.Group("/user") 
+	{
+		userGroup.PUT("/update", userHandler.UpdateUser)
+		userGroup.PUT("/update/profile-picture", userHandler.UpdateProfilePicture)
+		userGroup.DELETE("/delete/:id", userHandler.DeleteUser)
+		userGroup.GET("/", userHandler.GetAllUsers)
 	}
 
 	guitarGroup := r.Group("/guitar")
