@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// User
 func UpdateUser (c *gin.Context) {
 	log.Println("UpdateUser Endpoint")
 }
@@ -24,15 +23,3 @@ func GetAllUsers (c *gin.Context) {
 }
 
 
-// Reset Password Feature
-func RequestPasswordReset (c *gin.Context) {
-	log.Println("RequestPasswordReset Endpoint")
-}
-
-func VerifyCode (c *gin.Context) {
-	log.Println("VerifyCode Endpoint")
-}
-
-func UpdatePassword (c *gin.Context) {
-	log.Println("UpdatePassword Endpoint")
-}
