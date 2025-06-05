@@ -20,7 +20,24 @@ func NewHandler (db *gorm.DB) *Handler {
 
 // Handler Layer Methods
 func (h *Handler) SignUp (c *gin.Context) {
+	var req SignUpRequest
 
+	if err := c.ShouldBindJSON(&req); err != nil {
+		log.Println("Error at JSON binding", err)
+		c.JSON(400, gin.H{"error": err.Error() })
+	}
+
+	newUser, token, err := h.service.SignUp(req)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to sign up user"})
+	}
+
+	c.SetCookie("token", token, 3600, "/", "localhost", false, true)
+
+	c.JSON(201, gin.H{
+		"message":"User signed up successfully", 
+		"user": newUser,
+	})
 }
 
 
