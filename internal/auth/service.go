@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"fmt"
+
 	"github.com/bryanium-templates/go-clean-architecture/models"
 	"github.com/bryanium-templates/go-clean-architecture/utils"
 )
@@ -58,4 +60,29 @@ func (s *Service) SignUp (req SignUpRequest) (*models.User, string, error) {
     }
 
 	return  createdUser, token, nil
+}
+
+func (s *Service) SignIn (req SignInRequest) (string, error) {
+	if req.Email == "" || req.Password == "" {
+		return "", utils.ErrorHandler(400, "email and password are required", nil)
+	}
+
+	user, err := s.repo.FindByEmail(req.Email)
+	if err != nil {
+		return "", utils.ErrorHandler(500, "failed to verify if user exists", err)
+	}
+	if user == nil {
+		return "", utils.ErrorHandler(400, "invalid email or password", nil)
+	}
+
+	if err := utils.ValidatePassword(user.Password, req.Password); err != nil {
+		return "", utils.ErrorHandler(400, "invalid email or password", nil)
+	}
+
+	token, err := utils.GenerateJWT(user)
+	if err != nil {
+		return "", utils.ErrorHandler(500, fmt.Sprintf("failed to generate token: %v",err), err)
+	}
+
+	return token, nil
 }

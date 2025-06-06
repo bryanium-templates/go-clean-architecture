@@ -2,7 +2,9 @@ package auth
 
 import (
 	"log"
+	"net/http"
 
+	"github.com/bryanium-templates/go-clean-architecture/utils"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -29,11 +31,16 @@ func (h *Handler) SignUp (c *gin.Context) {
 
 	newUser, token, err := h.service.SignUp(req)
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Failed to sign up user"})
+		if appErr, ok := err.(*utils.AppError); ok {
+			c.JSON(appErr.Code, gin.H{"error": appErr.Message})
+			return
+		}
+
+		c.JSON(http.StatusInternalServerError, gin.H{"error":"internal server error"})
 		return
 	}
 
-	c.SetCookie("token", token, 3600, "/", "localhost", false, true)
+	c.SetCookie("jwt", token, 3600, "/", "localhost", false, true)
 
 	c.JSON(201, gin.H{
 		"message":"User signed up successfully", 
@@ -43,7 +50,29 @@ func (h *Handler) SignUp (c *gin.Context) {
 
 
 func (h *Handler) SignIn (c *gin.Context) {
-	log.Println("SignIn Endpoint")
+	var req SignInRequest
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		log.Println("Error at JSON binding", err)
+		c.JSON(400, gin.H{"error": err.Error() })
+	}
+
+	token, err := h.service.SignIn(req)
+	if err != nil {
+		if appErr, ok := err.(*utils.AppError); ok {
+			c.JSON(appErr.Code, gin.H{"error": appErr.Message})
+			return
+		}
+
+		c.JSON(http.StatusInternalServerError, gin.H{"error":"internal server error"})
+		return
+	}
+
+	c.SetCookie("jwt", token, 3600, "/", "localhost", false, true)
+
+	c.JSON(200, gin.H{
+		"message":"You have signed in successfully",
+	})
 }
 
 func (h *Handler) SignOut (c *gin.Context) {
