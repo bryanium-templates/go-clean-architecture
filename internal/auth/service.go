@@ -1,8 +1,6 @@
 package auth
 
 import (
-	"github.com/google/uuid"
-
 	"github.com/bryanium-templates/go-clean-architecture/models"
 	"github.com/bryanium-templates/go-clean-architecture/utils"
 )
@@ -39,7 +37,7 @@ func (s *Service) SignUp (req SignUpRequest) (*models.User, string, error) {
 		return nil, "", utils.ErrorHandler(500, "failed to hash the password", err)
 	}
 
-	userId := uuid.New()
+	userId := utils.GenerateUUID()
 
 	newUser := &models.User{
 		ID: userId,
