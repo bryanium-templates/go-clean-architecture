@@ -76,5 +76,9 @@ func (h *Handler) SignIn (c *gin.Context) {
 }
 
 func (h *Handler) SignOut (c *gin.Context) {
-	log.Println("SignOut Endpoint")
+	c.SetCookie("jwt", "", -1, "/", "localhost", false, true)
+
+	c.JSON(200, gin.H{
+		"message":"You have logged out successfully",
+	})
 }
