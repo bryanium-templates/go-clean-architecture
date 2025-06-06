@@ -1,12 +1,10 @@
 package auth
 
 import (
-	"fmt"
-	"time"
+	"github.com/google/uuid"
 
 	"github.com/bryanium-templates/go-clean-architecture/models"
-	"github.com/golang-jwt/jwt"
-	"golang.org/x/crypto/bcrypt"
+	"github.com/bryanium-templates/go-clean-architecture/utils"
 )
 
 // Service Layer Initializer
@@ -21,58 +19,45 @@ func NewService(repo *Repository) *Service {
 // Service Layer Methods
 func (s *Service) SignUp (req SignUpRequest) (*models.User, string, error) {
 	if req.Email == "" || req.Password == "" || req.Username == "" {
-		return nil, "", fmt.Errorf("email, password and username are required")
+		return nil, "", utils.ErrorHandler(400,"username, password, and email is required", nil)
+	}
+
+	if req.Password != req.ConfirmPassword {
+		return nil, "", utils.ErrorHandler(400, "passwords doesn't match", nil)
 	}
 
 	existingUser, err := s.repo.FindByEmail(req.Email)
     if err != nil {
-        return nil, "", fmt.Errorf("failed to check user existence: %v", err)
+        return nil, "", utils.ErrorHandler(500, "failed to verify if user exists", err)
     }
     if existingUser != nil {
-        return nil, "", fmt.Errorf("user with email %s already exists", req.Email)
+        return nil, "", utils.ErrorHandler(400,"user with email %s already exists", err)
     }
 
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
-    if err != nil {
-        return nil, "", fmt.Errorf("failed to hash password: %v", err)
-    }
+	hashedPassword,err := utils.HashPassword(req.Password)
+	if err != nil {
+		return nil, "", utils.ErrorHandler(500, "failed to hash the password", err)
+	}
+
+	userId := uuid.New()
 
 	newUser := &models.User{
+		ID: userId,
 		Username: req.Username,
 		Email: req.Email,
-		Password: string(hashedPassword),
+		Password: hashedPassword,
 		ProfilePicture: "",
 	}
 
 	createdUser, err := s.repo.CreateUser(newUser)
     if err != nil {
-        return nil, "", fmt.Errorf("failed to save user: %v", err)
+        return nil, "", utils.ErrorHandler(500,"failed to save user: %v", err)
     }
 
-	token, err := s.generateJWT(createdUser)
+	token, err := utils.GenerateJWT(createdUser)
     if err != nil {
-        return nil, "", fmt.Errorf("failed to generate token: %v", err)
+        return nil, "", utils.ErrorHandler(500,"failed to generate token: %v", err)
     }
 
 	return  createdUser, token, nil
-}
-
-
-func (s *Service) generateJWT(user *models.User) (string, error) {
-    // Create JWT claims
-    claims := jwt.MapClaims{
-        "sub": user.ID,         // subject, usually the user ID
-        "email": user.Email,    // additional user info
-        "username": user.Username,
-        "exp": time.Now().Add(time.Hour * 24).Unix(), // token expiration time
-    }
-
-    // Generate the token with your secret key
-    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-    tokenString, err := token.SignedString([]byte("your-secret-key"))
-    if err != nil {
-        return "", err
-    }
-
-    return tokenString, nil
 }

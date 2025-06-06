@@ -11,5 +11,7 @@ type SignUpRequest struct {
 
 type SignUpResponse struct {
 	ID uuid.UUID
-
+	Email string
+	Password string
+	ProfilePicture string
 }

@@ -30,6 +30,7 @@ func (h *Handler) SignUp (c *gin.Context) {
 	newUser, token, err := h.service.SignUp(req)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to sign up user"})
+		return
 	}
 
 	c.SetCookie("token", token, 3600, "/", "localhost", false, true)
