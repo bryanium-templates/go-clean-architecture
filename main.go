@@ -1,16 +1,26 @@
 package main
 
 import (
+	"flag"
+	"log"
+	"os"
+
 	"github.com/bryanium-templates/go-clean-architecture/infrastructure"
 )
 
-func init() {
+func main() {
 	infrastructure.LoadEnvVariables()
+
 	infrastructure.ConnectDb()
-	infrastructure.SyncDatabase()
-}
 
+	migrateNow := flag.Bool("migrate", false, "run DB migration & exit")
+	flag.Parse()
 
-func main(){
+	if *migrateNow {
+		infrastructure.SyncDatabase()
+		log.Println("Migration complete... exiting...")
+		os.Exit(0)
+	}
+
 	infrastructure.RunGin()
 }

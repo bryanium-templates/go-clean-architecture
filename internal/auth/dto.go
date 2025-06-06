@@ -1,7 +1,5 @@
 package auth
 
-import "github.com/google/uuid"
-
 type SignUpRequest struct {
 	Username string
 	Email string 
@@ -9,9 +7,7 @@ type SignUpRequest struct {
 	ConfirmPassword string
 }
 
-type SignUpResponse struct {
-	ID uuid.UUID
+type SignInRequest struct { 
 	Email string
 	Password string
-	ProfilePicture string
 }
