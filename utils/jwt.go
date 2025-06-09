@@ -11,7 +11,7 @@ import (
 func GenerateJWT(user *models.User) (string, error) {
 
 	claims := jwt.MapClaims{
-		"sub": user.ID,
+		"userId": user.ID.String(),
 		"email": user.Email,
 		"username": user.Username,
 		"exp": time.Now().Add(time.Hour * 4).Unix(),
