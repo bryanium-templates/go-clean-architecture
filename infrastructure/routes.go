@@ -7,6 +7,8 @@ import (
 	"github.com/bryanium-templates/go-clean-architecture/internal/guitar"
 	"github.com/bryanium-templates/go-clean-architecture/internal/passwordreset"
 	"github.com/bryanium-templates/go-clean-architecture/internal/user"
+
+	"github.com/bryanium-templates/go-clean-architecture/middleware"
 )
 
 func RegisterRoutes(r *gin.Engine) {
@@ -22,7 +24,7 @@ func RegisterRoutes(r *gin.Engine) {
 		authGroup.POST("/signout", authHandler.SignOut)
 	}
 
-	userGroup := r.Group("/user") 
+	userGroup := r.Group("/user", middleware.JWTAuthMiddleware()) 
 	{
 		userGroup.PUT("/update", userHandler.UpdateUser)
 		userGroup.PUT("/update/profile-picture", userHandler.UpdateProfilePicture)

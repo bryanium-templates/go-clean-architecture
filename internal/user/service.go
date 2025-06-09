@@ -10,3 +10,18 @@ func NewService(repo *Repository) *Service {
 }
 
 // Service Layer Methods
+func (s *Service) UpdateUser (req UpdateUserRequest) {
+
+}
+
+func (s *Service) UpdateProfilePicture (req UpdateProfilePicture) {
+
+}
+
+func (s *Service) DeleteUser (userId string) {
+
+}
+
+func (s *Service) GetAllUsers () {
+
+}
