@@ -41,11 +41,23 @@ func (h *Handler) UpdateUser (c *gin.Context) {
 }
 
 func (h *Handler )UpdateProfilePicture(c *gin.Context) {
-	log.Println("UpdateProfilePicture Endpoint")
+	userID, exists := c.Get("userId")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{ "error": "User not authenticated"})
+		return
+	}
+
+	log.Println("Authenticated User", userID)
 }
 
 func (h *Handler )DeleteUser (c *gin.Context) {
-	log.Println("DeleteUser Endpoint")
+	userID, exists := c.Get("userId")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{ "error": "User not authenticated"})
+		return
+	}
+
+	log.Println("Authenticated User", userID)
 }
 
 func (h *Handler) GetAllUsers (c *gin.Context) {
